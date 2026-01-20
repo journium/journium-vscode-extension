@@ -1,71 +1,39 @@
-# journium README
+# Journium
 
-This is the README for your extension "journium". After writing up a brief description, we recommend including the following sections.
+Journium tracker validation and tooling for VS Code.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
-
-For example if there is an image subfolder under your extension project workspace:
-
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+- **Schema Validation**: Automatically validates `journium-tracker.yml` and `journium-tracker.yaml` files against the Journium insight tracker schema
+- **Easy Setup**: One command to enable schema validation for your workspace
+- **Real-time Validation**: Get instant feedback on your tracker YAML files as you edit them
 
 ## Requirements
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+- VS Code 1.108.1 or higher
+- [YAML Extension](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml) by Red Hat (automatically installed as a dependency)
+
+## Usage
+
+1. Open a workspace folder in VS Code
+2. Run the command `Journium: Enable schema validation for this workspace` from the Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`)
+3. Create or edit `journium-tracker.yml` or `journium-tracker.yaml` files in your workspace
+4. The YAML extension will automatically validate your files against the Journium schema
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
+This extension configures the YAML extension to validate tracker files. The configuration is stored in your workspace `.vscode/settings.json` file.
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
+### 0.0.1
 
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
+Initial release of Journium extension:
+- Enable schema validation for journium-tracker.yml/.yaml files
+- Automatic integration with YAML extension
 
 ---
 
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
 ## For more information
 
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+Visit [Journium](https://journium.app) for more information about Journium trackers and schemas.

@@ -1,9 +1,14 @@
 {
   "name": "journium",
   "displayName": "Journium",
-  "description": "Journium tracker validation and tooling",
+  "description": "Journium Insight Trackers validation and tooling",
   "version": "0.0.1",
   "publisher": "journium",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/journium/journium-vscode-extension.git"
+  },
   "icon": "icon.png",
   "engines": {
     "vscode": "^1.105.0"
@@ -12,13 +17,13 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:journium.enableSchemaValidation"
   ],
   "extensionDependencies": [
     "redhat.vscode-yaml"
   ],
   "keywords": [
     "journium",
+    "insight",
     "tracker",
     "validation",
     "tooling"
@@ -44,12 +49,15 @@
     "pretest": "pnpm run compile-tests && pnpm run compile && pnpm run lint",
     "check-types": "tsc --noEmit",
     "lint": "eslint src",
-    "test": "vscode-test"
+    "test": "vscode-test",
+    "package-vsix": "pnpm run package && pnpm exec vsce package",
+    "publish-vscode": "pnpm run package && pnpm exec vsce publish",
+    "publish-ovsx": "pnpm run package && pnpm exec ovsx publish"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
     "@types/node": "22.x",
-    "@types/vscode": "^1.108.1",
+    "@types/vscode": "^1.105.0",
     "@typescript-eslint/eslint-plugin": "^8.53.1",
     "@typescript-eslint/parser": "^8.53.1",
     "@vscode/test-cli": "^0.0.12",

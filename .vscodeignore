@@ -5,8 +5,12 @@ node_modules/**
 src/**
 .gitignore
 .yarnrc
+.npmrc
 esbuild.js
 vsc-extension-quickstart.md
+PUBLISHING.md
+pnpm-lock.yaml
+journium_icon.png
 **/tsconfig.json
 **/eslint.config.mjs
 **/*.map
