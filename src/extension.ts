@@ -3,7 +3,10 @@ import * as vscode from "vscode";
 const SCHEMA_URL =
   "https://journium.app/schemas/journium-insight-tracker.schema.json";
 
-const TRACKER_PATTERNS = ["**/journium-tracker.yml", "**/journium-tracker.yaml"];
+const TRACKER_PATTERNS = [
+  "**/*journium-tracker*.yml",
+  "**/*journium-tracker*.yaml",
+];
 
 export function activate(context: vscode.ExtensionContext) {
   console.log("Journium extension is activating...");
@@ -45,7 +48,7 @@ export function activate(context: vscode.ExtensionContext) {
       );
 
       vscode.window.showInformationMessage(
-        "Journium schema validation enabled for journium-tracker.yml/.yaml in this workspace."
+        "Journium schema validation enabled for files containing 'journium-tracker' in this workspace."
       );
     }
   );
