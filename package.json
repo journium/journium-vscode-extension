@@ -3,19 +3,32 @@
   "displayName": "Journium",
   "description": "Journium tracker validation and tooling",
   "version": "0.0.1",
+  "publisher": "journium",
+  "icon": "icon.png",
   "engines": {
-    "vscode": "^1.108.1"
+    "vscode": "^1.105.0"
   },
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onCommand:journium.enableSchemaValidation"
+  ],
+  "extensionDependencies": [
+    "redhat.vscode-yaml"
+  ],
+  "keywords": [
+    "journium",
+    "tracker",
+    "validation",
+    "tooling"
+  ],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "journium.helloWorld",
-        "title": "Hello World"
+        "command": "journium.enableSchemaValidation",
+        "title": "Journium: Enable schema validation for this workspace"
       }
     ]
   },
@@ -34,16 +47,21 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "^1.108.1",
     "@types/mocha": "^10.0.10",
     "@types/node": "22.x",
-    "typescript-eslint": "^8.52.0",
-    "eslint": "^9.39.2",
-    "esbuild": "^0.27.2",
-    "npm-run-all": "^4.1.5",
-    "typescript": "^5.9.3",
+    "@types/vscode": "^1.108.1",
+    "@typescript-eslint/eslint-plugin": "^8.53.1",
+    "@typescript-eslint/parser": "^8.53.1",
     "@vscode/test-cli": "^0.0.12",
-    "@vscode/test-electron": "^2.5.2"
+    "@vscode/test-electron": "^2.5.2",
+    "@vscode/vsce": "^3.7.1",
+    "esbuild": "^0.27.2",
+    "eslint": "^9.39.2",
+    "npm-run-all": "^4.1.5",
+    "ovsx": "^0.10.8",
+    "prettier": "^3.8.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.52.0"
   },
   "packageManager": "pnpm@10.16.1"
 }

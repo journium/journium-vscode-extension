@@ -1,26 +1,57 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
-import * as vscode from 'vscode';
+import * as vscode from "vscode";
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
+const SCHEMA_URL =
+  "https://journium.app/schemas/journium-insight-tracker.schema.json";
+
+const TRACKER_PATTERNS = ["**/journium-tracker.yml", "**/journium-tracker.yaml"];
+
 export function activate(context: vscode.ExtensionContext) {
+  console.log("Journium extension is activating...");
+  
+  const disposable = vscode.commands.registerCommand(
+    "journium.enableSchemaValidation",
+    async () => {
+      const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
+      if (!workspaceFolder) {
+        vscode.window.showErrorMessage(
+          "No workspace folder is open. Open a folder/workspace and try again."
+        );
+        return;
+      }
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "journium" is now active!');
+      // Workspace-scoped settings (writes to .vscode/settings.json)
+      const yamlConfig = vscode.workspace.getConfiguration(
+        "yaml",
+        workspaceFolder.uri
+      );
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerCommand('journium.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from Journium!');
-	});
+      const currentSchemas =
+        (yamlConfig.get<Record<string, string[]>>("schemas") ?? {});
 
-	context.subscriptions.push(disposable);
+      const existingPatterns = new Set(currentSchemas[SCHEMA_URL] ?? []);
+      for (const p of TRACKER_PATTERNS) {
+        existingPatterns.add(p);
+      }
+
+      const nextSchemas: Record<string, string[]> = {
+        ...currentSchemas,
+        [SCHEMA_URL]: Array.from(existingPatterns),
+      };
+
+      await yamlConfig.update(
+        "schemas",
+        nextSchemas,
+        vscode.ConfigurationTarget.Workspace
+      );
+
+      vscode.window.showInformationMessage(
+        "Journium schema validation enabled for journium-tracker.yml/.yaml in this workspace."
+      );
+    }
+  );
+
+  context.subscriptions.push(disposable);
+  console.log("Journium extension activated successfully!");
 }
 
-// This method is called when your extension is deactivated
 export function deactivate() {}
