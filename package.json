@@ -2,7 +2,7 @@
   "name": "journium",
   "displayName": "Journium",
   "description": "Journium Insight Trackers validation and tooling",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "publisher": "Journium",
   "license": "MIT",
   "repository": {
