@@ -4,9 +4,12 @@ Journium tracker validation and tooling for VS Code.
 
 ## Features
 
-- **Schema Validation**: Automatically validates YAML files containing `journium-tracker` in the filename (e.g., `journium-tracker.yml`, `my-journium-tracker.yaml`, `journium-tracker-v2.yml`) against the Journium insight tracker schema
-- **Easy Setup**: One command to enable schema validation for your workspace
+- **Automatic Activation**: Extension activates automatically when it detects YAML files under `.journium/trackers/` in your workspace
+- **Schema Validation**: Validates all YAML files in `.journium/trackers/` (at any depth) against the Journium insight tracker schema
+- **Zero Configuration**: Schema validation is enabled automatically when the extension activates - no manual setup required
 - **Real-time Validation**: Get instant feedback on your tracker YAML files as you edit them
+- **Monorepo Support**: Works with nested `.journium/trackers/` folders at any level in your workspace
+
 
 ## Requirements
 
@@ -15,23 +18,63 @@ Journium tracker validation and tooling for VS Code.
 
 ## Usage
 
-1. Open a workspace folder in VS Code
-2. Run the command `Journium: Enable schema validation for this workspace` from the Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`)
-3. Create or edit YAML files containing `journium-tracker` in the filename (e.g., `journium-tracker.yml`, `my-journium-tracker.yaml`)
-4. The YAML extension will automatically validate your files against the Journium schema
+### Getting Started
+
+The extension works automatically once installed:
+
+1. **Install the extension** from the VS Code Marketplace
+2. **Create or open a workspace** with a `.journium/trackers/` folder containing YAML files
+3. **Extension auto-activates** and configures schema validation
+4. **Start editing** - you'll see validation, auto-completion, and hover documentation
+
+> **Note**: The extension activates when it detects files matching `**/.journium/trackers/**/*.yml` or `**/.journium/trackers/**/*.yaml` in your workspace.
+
+### Manual Configuration (Optional)
+
+If you need to manually trigger configuration:
+
+1. Open the Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`)
+2. Run: `Journium: Enable schema validation for this workspace`
+
+This is useful for setting up validation before creating tracker files.
 
 ## Extension Settings
 
-This extension configures the YAML extension to validate tracker files. The configuration is stored in your workspace `.vscode/settings.json` file.
+This extension automatically configures the YAML extension to validate tracker files in `.journium/trackers/`. The configuration is stored in your workspace `.vscode/settings.json` file.
 
-### Settings Persistence
+### What Gets Configured
 
-**Important**: The schema validation settings persist in your workspace even if you disable or uninstall the extension. This is intentional and follows VS Code best practices:
+When the extension activates (first install or after an update), it updates your workspace settings (`.vscode/settings.json`):
 
+```json
+{
+  "yaml.schemas": {
+    "https://journium.app/schemas/journium-insight-tracker.schema.json": [
+      "**/.journium/trackers/**/*.yml",
+      "**/.journium/trackers/**/*.yaml"
+    ]
+  }
+}
+```
+
+This configuration:
+- ✅ **Only affects files under `.journium/trackers/`** - your other YAML files remain unchanged
+- ✅ **Works at any depth** - supports monorepos with nested tracker folders
+- ✅ **Persists across sessions** - no need to reconfigure after reopening the workspace
+- ✅ **Can be version controlled** - commit to share validation with your team
+
+### Settings Behavior
+
+**Automatic Modification**: This extension follows VS Code best practices by automatically modifying workspace settings (similar to how the ESLint, Prettier, and other popular language extensions work). This provides:
+- Zero-configuration experience
+- Immediate validation on installation
+- Team-wide consistency when settings are committed
+
+**Settings Persistence**: The schema validation settings persist in your workspace even if you disable or uninstall the extension. This is intentional and follows VS Code extension guidelines:
 - **Settings belong to your workspace**, not the extension
 - **Your configuration is preserved** if you temporarily disable the extension
 - **No data loss** if you uninstall and reinstall the extension later
-- **Team consistency** - settings are committed with your workspace, so all team members get validation
+- **Team consistency** - settings can be committed with your workspace
 
 ### Removing Schema Validation
 
@@ -48,35 +91,35 @@ Alternatively, you can delete the entire `yaml.schemas` section if it only conta
 
 The extension does **not** automatically remove settings when:
 - The extension is disabled
-- The extension is deactivated
+- The extension is deactivated  
 - The extension is uninstalled
 
-This follows VS Code extension best practices:
-- **User data integrity**: Workspace settings are user data and should not be modified without explicit user action
+This follows [VS Code extension guidelines](https://code.visualstudio.com/docs/configure/settings) and industry best practices:
+- **User data integrity**: Workspace settings are considered user data and should not be modified without explicit user action
 - **Predictable behavior**: Settings remain stable and don't disappear unexpectedly
 - **Team workflows**: Settings committed to version control persist for all team members
 - **Reversibility**: You can easily re-enable validation by running the command again
 
 If you need to remove the settings, please do so manually as described above.
 
+### Privacy & Performance
+
+**No External Scans**: The extension uses VS Code's built-in file index to detect `.journium/trackers/` folders - it does not perform additional file system scans or impact performance.
+
+**Local Validation**: Schema validation happens entirely within VS Code using the YAML extension - no data is sent to external servers.
+
+## Known Issues
+
+None at this time. Please [report issues](https://github.com/journium/journium-vscode-extension/issues) on GitHub.
+
 ## Release Notes
 
-### 0.0.2
+See [CHANGELOG.md](https://github.com/journium/journium-vscode-extension/blob/main/CHANGELOG.md) for detailed release notes.
 
-**Changed**
-- Flexible file pattern matching: Schema validation now matches any YAML file containing `journium-tracker` anywhere in the filename (e.g., `journium-tracker.yml`, `my-journium-tracker.yaml`, `journium-tracker-v2.yml`)
+### Latest: 0.0.2
 
-**Fixed**
-- Corrected VS Code version requirement in documentation
-
-### 0.0.1
-
-**Added**
-- Initial release of Journium VS Code extension
-- Command to enable schema validation for workspace
-- Automatic integration with YAML extension for real-time validation
-- Schema validation for `journium-tracker.yml` and `journium-tracker.yaml` files
-- Workspace-scoped settings configuration
+- Flexible file pattern matching for tracker files
+- Improved documentation
 
 ---
 

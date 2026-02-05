@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Automatic activation when workspace contains `.journium/trackers/` folders
+- Support for tracker files at any depth in the workspace (monorepo-friendly)
+- Zero-configuration setup - schema validation works immediately after installation
+- Silent version tracking using `globalState` for automatic upgrades
+
+### Changed
+- **IMPORTANT**: Recommended tracker file location is now `**/.journium/trackers/**/*.yml`
+- Extension now auto-enables schema validation on activation (no manual command required)
+- New file patterns: `**/.journium/trackers/**/*.yml` and `**/.journium/trackers/**/*.yaml`
+- Updated documentation with best practices and usage guidelines
+
+### Migration Notes
+If you're upgrading from v0.0.2:
+- Your workspace settings will be automatically updated when you reload VS Code
+- **Existing file patterns from v0.0.2 are preserved** - the extension adds new patterns alongside your old ones (additive, not replacement)
+- Both old location (`my-journium-tracker.yml` anywhere in repo) and new location (`.journium/trackers/my-tracker.yml`) continue to work
+- Your existing tracker files will continue to validate without any changes
+- Consider moving your tracker files to `.journium/trackers/` directory for better organization (optional)
+- No breaking changes - migration is optional but recommended
+
 ## [0.0.2] - 2025-01-20
 
 ### Changed

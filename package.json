@@ -2,7 +2,7 @@
   "name": "journium",
   "displayName": "Journium",
   "description": "Journium Insight Trackers validation and tooling",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "publisher": "Journium",
   "license": "MIT",
   "repository": {
@@ -17,6 +17,8 @@
     "Other"
   ],
   "activationEvents": [
+    "workspaceContains:**/.journium/trackers/**/*.yml",
+    "workspaceContains:**/.journium/trackers/**/*.yaml"
   ],
   "extensionDependencies": [
     "redhat.vscode-yaml"
