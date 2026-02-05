@@ -116,10 +116,6 @@ None at this time. Please [report issues](https://github.com/journium/journium-v
 
 See [CHANGELOG.md](https://github.com/journium/journium-vscode-extension/blob/main/CHANGELOG.md) for detailed release notes.
 
-### Latest: 0.0.2
-
-- Flexible file pattern matching for tracker files
-- Improved documentation
 
 ---
 
